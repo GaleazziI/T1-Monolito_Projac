@@ -1,0 +1,119 @@
+{
+  "data": [
+    {
+      "cod_turma": 3,
+      "nm_turma": "Turma A",
+      "sgl_turma": "A",
+      "ano": 2026,
+      "ativo": 1,
+      "visivel": true,
+      "ref_cod_curso": 2,
+      "ref_ref_cod_escola": 2,
+      "ref_ref_cod_serie": 3,
+      "course": {
+        "id": 2,
+        "name": "Engenharia de Software",
+        "ativo": 1
+      },
+      "school": {
+        "id": 2,
+        "sigla": "EDC",
+        "ativo": 1,
+        "person": {
+          "id": 4,
+          "name": "Escola de Tecnologia - Campus Central"
+        }
+      }
+    },
+    {
+      "cod_turma": 4,
+      "nm_turma": "Turma B",
+      "sgl_turma": "B",
+      "ano": 2026,
+      "ativo": 1,
+      "visivel": true,
+      "ref_cod_curso": 2,
+      "ref_ref_cod_escola": 2,
+      "ref_ref_cod_serie": 3,
+      "course": {
+        "id": 2,
+        "name": "Engenharia de Software",
+        "ativo": 1
+      },
+      "school": {
+        "id": 2,
+        "sigla": "EDC",
+        "ativo": 1,
+        "person": {
+          "id": 4,
+          "name": "Escola de Tecnologia - Campus Central"
+        }
+      }
+    },
+    {
+      "cod_turma": 5,
+      "nm_turma": "Turma A",
+      "sgl_turma": "A",
+      "ano": 2026,
+      "ativo": 1,
+      "visivel": true,
+      "ref_cod_curso": 3,
+      "ref_ref_cod_escola": 2,
+      "ref_ref_cod_serie": 4,
+      "course": {
+        "id": 3,
+        "name": "Análise e Desenvolvimento de Sistemas",
+        "ativo": 1
+      },
+      "school": {
+        "id": 2,
+        "sigla": "EDC",
+        "ativo": 1,
+        "person": {
+          "id": 4,
+          "name": "Escola de Tecnologia - Campus Central"
+        }
+      }
+    },
+    {
+      "cod_turma": 6,
+      "nm_turma": "Turma C",
+      "sgl_turma": "C",
+      "ano": 2026,
+      "ativo": 1,
+      "visivel": true,
+      "ref_cod_curso": 3,
+      "ref_ref_cod_escola": 2,
+      "ref_ref_cod_serie": 4,
+      "course": {
+        "id": 3,
+        "name": "Análise e Desenvolvimento de Sistemas",
+        "ativo": 1
+      },
+      "school": {
+        "id": 2,
+        "sigla": "EDC",
+        "ativo": 1,
+        "person": {
+          "id": 4,
+          "name": "Escola de Tecnologia - Campus Central"
+        }
+      }
+    }
+  ],
+  "links": {
+    "first": "http://localhost:18080/api/school-class?page=1",
+    "last": "http://localhost:18080/api/school-class?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "http://localhost:18080/api/school-class",
+    "per_page": 100,
+    "to": 4,
+    "total": 4
+  }
+}

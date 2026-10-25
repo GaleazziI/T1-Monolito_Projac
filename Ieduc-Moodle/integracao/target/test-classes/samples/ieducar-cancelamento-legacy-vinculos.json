@@ -1,0 +1,82 @@
+{
+  "vinculos": [
+    {
+      "id": 1,
+      "servidor_id": 13,
+      "turma_id": 3,
+      "turno_id": 1,
+      "permite_lancar_faltas_componente": 0,
+      "disciplinas": [
+        {
+          "id": 3,
+          "serie_id": 3,
+          "tipo_nota": 1
+        }
+      ],
+      "disciplinas_serie": {
+        "3": [
+          3
+        ]
+      },
+      "updated_at": "2026-10-25 15:59:12.694885",
+      "deleted_at": null
+    },
+    {
+      "id": 3,
+      "servidor_id": 17,
+      "turma_id": 5,
+      "turno_id": 1,
+      "permite_lancar_faltas_componente": 0,
+      "disciplinas": [
+        {
+          "id": 4,
+          "serie_id": 4,
+          "tipo_nota": 1
+        }
+      ],
+      "disciplinas_serie": {
+        "4": [
+          4
+        ]
+      },
+      "updated_at": "2026-10-25 15:59:12.694885",
+      "deleted_at": null
+    },
+    {
+      "id": 4,
+      "servidor_id": 21,
+      "turma_id": 6,
+      "turno_id": 1,
+      "permite_lancar_faltas_componente": 0,
+      "disciplinas": [
+        {
+          "id": 4,
+          "serie_id": 4,
+          "tipo_nota": 1
+        }
+      ],
+      "disciplinas_serie": {
+        "4": [
+          4
+        ]
+      },
+      "updated_at": "2026-10-25 15:59:12.694885",
+      "deleted_at": "2026-10-25 16:00:05"
+    },
+    {
+      "id": 2,
+      "servidor_id": 15,
+      "turma_id": 4,
+      "turno_id": 1,
+      "permite_lancar_faltas_componente": null,
+      "disciplinas": [],
+      "disciplinas_serie": [],
+      "updated_at": "2026-10-25 16:00:05",
+      "deleted_at": "2026-10-25 16:00:05"
+    }
+  ],
+  "oper": "get",
+  "resource": "servidores-disciplinas-turmas",
+  "msgs": [],
+  "any_error_msg": false
+}

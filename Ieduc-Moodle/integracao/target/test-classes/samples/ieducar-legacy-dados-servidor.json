@@ -1,0 +1,15 @@
+{
+  "result": {
+    "servidor_id": 13,
+    "nome": "Prof. Marcos Vinícius Ribeiro",
+    "cpf": "200.000.001-08",
+    "ativo": 1,
+    "updated_at": "2026-10-25 15:59:12.694885",
+    "inep": null,
+    "email": "marcos.ribeiro@prof.demo.edu.br"
+  },
+  "oper": "get",
+  "resource": "dados-servidor",
+  "msgs": [],
+  "any_error_msg": false
+}

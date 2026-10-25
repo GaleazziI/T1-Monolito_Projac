@@ -1,0 +1,283 @@
+{
+  "data": [
+    {
+      "id": 3,
+      "student_id": 3,
+      "nome": "Ana Beatriz Souza",
+      "email": "ana.souza@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 2,
+      "student": {
+        "id": 3,
+        "individual": {
+          "idpes": 5,
+          "cpf": "100.000.001-08"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 3,
+          "ref_cod_turma": 3,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "student_id": 4,
+      "nome": "Bruno Henrique Lima",
+      "email": "bruno.lima@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 2,
+      "student": {
+        "id": 4,
+        "individual": {
+          "idpes": 6,
+          "cpf": "100.000.002-80"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 4,
+          "ref_cod_turma": 3,
+          "sequencial": 1,
+          "ativo": 0,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "student_id": 5,
+      "nome": "Carla Mendes Ferreira",
+      "email": "carla.ferreira@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 2,
+      "student": {
+        "id": 5,
+        "individual": {
+          "idpes": 7,
+          "cpf": "100.000.003-61"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 5,
+          "ref_cod_turma": 3,
+          "sequencial": 1,
+          "ativo": 0,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "student_id": 6,
+      "nome": "Diego Almeida Costa",
+      "email": "diego.costa@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 2,
+      "student": {
+        "id": 6,
+        "individual": {
+          "idpes": 8,
+          "cpf": "100.000.004-42"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 6,
+          "ref_cod_turma": 4,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "student_id": 7,
+      "nome": "Eduarda Pereira Rocha",
+      "email": "eduarda.rocha@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 2,
+      "student": {
+        "id": 7,
+        "individual": {
+          "idpes": 9,
+          "cpf": "100.000.005-23"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 7,
+          "ref_cod_turma": 4,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "student_id": 8,
+      "nome": "Felipe Santos Oliveira",
+      "email": "felipe.oliveira@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 3,
+      "student": {
+        "id": 8,
+        "individual": {
+          "idpes": 10,
+          "cpf": "100.000.006-04"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 8,
+          "ref_cod_turma": 5,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "student_id": 9,
+      "nome": "Gabriela Martins Duarte",
+      "email": "gabriela.duarte@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 3,
+      "student": {
+        "id": 9,
+        "individual": {
+          "idpes": 11,
+          "cpf": "100.000.007-95"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 9,
+          "ref_cod_turma": 5,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "student_id": 10,
+      "nome": "Henrique Barbosa Teixeira",
+      "email": "henrique.teixeira@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 3,
+      "student": {
+        "id": 10,
+        "individual": {
+          "idpes": 12,
+          "cpf": "100.000.008-76"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 10,
+          "ref_cod_turma": 5,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "student_id": 11,
+      "nome": "Isabela Rodrigues Campos",
+      "email": "isabela.campos@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 3,
+      "student": {
+        "id": 11,
+        "individual": {
+          "idpes": 19,
+          "cpf": "100.000.009-57"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 11,
+          "ref_cod_turma": 6,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "student_id": 12,
+      "nome": "João Pedro Azevedo",
+      "email": "joao.azevedo@aluno.demo.edu.br",
+      "aprovado": 3,
+      "ativo": 1,
+      "ano": 2026,
+      "ref_ref_cod_escola": 2,
+      "ref_cod_curso": 3,
+      "student": {
+        "id": 12,
+        "individual": {
+          "idpes": 20,
+          "cpf": "100.000.010-90"
+        }
+      },
+      "enrollments": [
+        {
+          "ref_cod_matricula": 12,
+          "ref_cod_turma": 6,
+          "sequencial": 1,
+          "ativo": 1,
+          "data_enturmacao": "2026-10-25 00:00:00"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "http://localhost:18080/api/registration",
+    "per_page": 100,
+    "to": 10,
+    "total": 10
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "oper": "get",
+  "resource": "servidores",
+  "msgs": [
+    {
+      "msg": "Chave de acesso inválida!",
+      "type": "error"
+    }
+  ],
+  "any_error_msg": true
+}
