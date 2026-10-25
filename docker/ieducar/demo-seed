@@ -1,0 +1,6 @@
+#!/bin/sh
+# Uso: demo-seed [base|nova-turma]
+#   base        cria a instituição, escola, cursos, turmas, alunos, matrículas e professores de exemplo
+#   nova-turma  cria UMA nova turma (com 2 alunos matriculados e 1 professor), para a demonstração ao vivo
+cd /var/www/ieducar || exit 1
+exec su-exec www-data php /usr/local/share/ieducar/demo-seed.php "${1:-base}"

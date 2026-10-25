@@ -1,0 +1,148 @@
+# Ambiente completo da integração iEducar -> Moodle.
+#   iEducar:    http://localhost:${IEDUCAR_PORT:-8080}     (admin / 123456789)
+#   Moodle:     http://localhost:${MOODLE_PORT:-8081}     (admin / Admin@12345)
+#   Integração: http://localhost:${INTEGRACAO_PORT:-8090}  (painel + API de sincronização)
+# Entre containers: ieducar (porta 80), moodle (porta 8080), integracao (porta 8080).
+services:
+  # ---------------- iEducar (fonte) ----------------
+  ieducar-db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: ieducar
+      POSTGRES_USER: ieducar
+      POSTGRES_PASSWORD: ieducar
+    volumes:
+      - ieducar-db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ieducar -d ieducar"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  ieducar-redis:
+    image: redis:8-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  ieducar:
+    build:
+      context: ./docker/ieducar
+      args:
+        IEDUCAR_REF: "2.12"
+        # Se o build falhar com "Could not authenticate against github.com" (limite da API do GitHub),
+        # defina COMPOSER_INSTALL_FLAGS=--prefer-source no .env (a imagem fica maior).
+        COMPOSER_INSTALL_FLAGS: ${COMPOSER_INSTALL_FLAGS:-}
+    image: integracao/ieducar:2.12
+    depends_on:
+      ieducar-db:
+        condition: service_healthy
+      ieducar-redis:
+        condition: service_healthy
+    ports:
+      - "${IEDUCAR_PORT:-8080}:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: http://localhost:${IEDUCAR_PORT:-8080}
+      APP_TIMEZONE: America/Sao_Paulo
+      DB_HOST: ieducar-db
+      DB_DATABASE: ieducar
+      DB_USERNAME: ieducar
+      DB_PASSWORD: ieducar
+      REDIS_HOST: ieducar-redis
+      API_ACCESS_KEY: ${IEDUCAR_API_ACCESS_KEY:-ieducar-access-key}
+      API_SECRET_KEY: ${IEDUCAR_API_SECRET_KEY:-ieducar-secret-key}
+      IEDUCAR_API_TOKEN: ${IEDUCAR_API_TOKEN:-ieducar-integracao-token-trocar-em-producao-0000}
+    volumes:
+      - ieducar-storage:/var/www/ieducar/storage
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1/api/version >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+      start_period: 600s
+    restart: unless-stopped
+
+  # ---------------- Moodle (destino) ----------------
+  moodle-db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: moodle
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: moodle
+    volumes:
+      - moodle_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U moodle -d moodle"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  moodle:
+    image: bitnamilegacy/moodle:5.0.2
+    restart: unless-stopped
+    depends_on:
+      moodle-db:
+        condition: service_healthy
+    ports:
+      - "${MOODLE_PORT:-8081}:8080"
+    environment:
+      MOODLE_DATABASE_TYPE: pgsql
+      MOODLE_DATABASE_HOST: moodle-db
+      MOODLE_DATABASE_PORT_NUMBER: "5432"
+      MOODLE_DATABASE_NAME: moodle
+      MOODLE_DATABASE_USER: moodle
+      MOODLE_DATABASE_PASSWORD: moodle
+      MOODLE_USERNAME: ${MOODLE_ADMIN_USER:-admin}
+      MOODLE_PASSWORD: ${MOODLE_ADMIN_PASSWORD:-Admin@12345}
+      MOODLE_EMAIL: admin@exemplo.edu.br
+      MOODLE_SITE_NAME: "Moodle - Integração iEducar"
+      MOODLE_LANG: pt_br
+      # MOODLE_HOST não é definido de propósito: o wwwroot fica dinâmico ($_SERVER['HTTP_HOST']),
+      # então localhost:8081 (navegador) e moodle:8080 (aplicação de integração) funcionam.
+      MOODLE_WS_TOKEN: ${MOODLE_WS_TOKEN:-a1b2c3d4e5f60718293a4b5c6d7e8f90}
+    volumes:
+      - moodle_data:/bitnami/moodle
+      - moodle_moodledata:/bitnami/moodledata
+      - ./docker/moodle/init:/docker-entrypoint-init.d:ro
+    healthcheck:
+      # a imagem não tem curl/wget: testa o HTTP com o /dev/tcp do bash
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/8080 && printf \"GET /login/index.php HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && head -n1 <&3 | grep -q \" 200 \"'"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+      start_period: 120s
+
+  # ---------------- Aplicação de integração ----------------
+  integracao:
+    build: ./Ieduc-Moodle/integracao
+    depends_on:
+      ieducar:
+        condition: service_healthy
+      moodle:
+        condition: service_healthy
+    ports:
+      - "${INTEGRACAO_PORT:-8090}:8080"
+    environment:
+      IEDUCAR_URL: http://ieducar
+      IEDUCAR_API_TOKEN: ${IEDUCAR_API_TOKEN:-ieducar-integracao-token-trocar-em-producao-0000}
+      IEDUCAR_API_ACCESS_KEY: ${IEDUCAR_API_ACCESS_KEY:-ieducar-access-key}
+      IEDUCAR_API_SECRET_KEY: ${IEDUCAR_API_SECRET_KEY:-ieducar-secret-key}
+      MOODLE_URL: http://moodle:8080
+      MOODLE_WS_TOKEN: ${MOODLE_WS_TOKEN:-a1b2c3d4e5f60718293a4b5c6d7e8f90}
+      MOODLE_SENHA_INICIAL: ${MOODLE_SENHA_INICIAL:-Mudar@2026!}
+      SINCRONIZACAO_INTERVALO: ${SINCRONIZACAO_INTERVALO:-PT2M}
+    restart: unless-stopped
+
+volumes:
+  ieducar-db-data:
+  ieducar-storage:
+  moodle_db_data:
+  moodle_data:
+  moodle_moodledata:
