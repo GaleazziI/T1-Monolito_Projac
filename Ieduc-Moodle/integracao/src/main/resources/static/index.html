@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integração iEducar → Moodle</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 760px; margin: 2rem auto; padding: 0 1rem; color: #1f2937; }
+  h1 { font-size: 1.4rem; }
+  button { font-size: 1rem; padding: .6rem 1.2rem; border: 0; border-radius: 6px; background: #2563eb; color: #fff; cursor: pointer; }
+  button:disabled { background: #94a3b8; cursor: wait; }
+  table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+  td, th { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid #e5e7eb; }
+  .status { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-weight: 600; }
+  .SUCESSO { background: #dcfce7; color: #166534; } .PARCIAL { background: #fef9c3; color: #854d0e; } .FALHA { background: #fee2e2; color: #991b1b; }
+  .erros { background: #fef2f2; padding: .6rem 1rem; border-radius: 6px; margin-top: 1rem; }
+  small { color: #6b7280; }
+</style>
+</head>
+<body>
+<h1>Integração iEducar → Moodle</h1>
+<p>Turmas viram cursos, alunos matriculados viram inscrições e professores viram professores do curso.
+   A sincronização roda sozinha periodicamente; use o botão para forçar agora.</p>
+<button id="botao">Sincronizar agora</button> <small id="msg"></small>
+<div id="relatorio"></div>
+<script>
+const rotulos = {
+  turmasLidas: 'Turmas lidas no iEducar', cursosCriados: 'Cursos criados no Moodle', cursosAtualizados: 'Cursos atualizados',
+  cursosOcultados: 'Cursos ocultados (turma inativa)', usuariosCriados: 'Usuários criados', usuariosAtualizados: 'Usuários atualizados',
+  inscricoesCriadas: 'Inscrições criadas/reativadas', inscricoesSuspensas: 'Inscrições suspensas'
+};
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function mostrar(r) {
+  if (!r) { document.getElementById('relatorio').innerHTML = '<p><small>Nenhuma sincronização executada ainda.</small></p>'; return; }
+  let h = `<p>Última execução (${esc(r.origem)}): <span class="status ${r.status}">${r.status}</span>
+           <small>${new Date(r.inicio).toLocaleString('pt-BR')} — ${new Date(r.fim) - new Date(r.inicio)} ms</small></p><table>`;
+  for (const k in rotulos) h += `<tr><th>${rotulos[k]}</th><td>${r[k]}</td></tr>`;
+  h += '</table>';
+  if (r.erros.length) h += '<div class="erros"><strong>Erros</strong><ul>' + r.erros.map(e => `<li>${esc(e)}</li>`).join('') + '</ul></div>';
+  document.getElementById('relatorio').innerHTML = h;
+}
+async function carregar() {
+  const r = await fetch('/api/sincronizacao/ultima');
+  mostrar(r.status === 200 ? await r.json() : null);
+}
+document.getElementById('botao').onclick = async function () {
+  this.disabled = true; document.getElementById('msg').textContent = 'sincronizando…';
+  try {
+    const r = await fetch('/api/sincronizacao', { method: 'POST' });
+    if (r.status === 409) document.getElementById('msg').textContent = 'já existe uma sincronização em andamento';
+    else { mostrar(await r.json()); document.getElementById('msg').textContent = ''; }
+  } catch (e) { document.getElementById('msg').textContent = 'erro: ' + e; }
+  this.disabled = false;
+};
+carregar(); setInterval(carregar, 10000);
+</script>
+</body>
+</html>

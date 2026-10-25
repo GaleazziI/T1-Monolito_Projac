@@ -1,5 +1,4 @@
 package com.pucrs.integracao.domain.model;
 
-public class Professor {
-
+public record Professor(long id, String nome, String email, String cpf) {
 }
