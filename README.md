@@ -1,4 +1,4 @@
-# T1 – Monolito: integração iEducar ⇄ Moodle
+# T1 - Monolito: integração iEducar - Moodle
 
 Aplicação monolítica em **Java (Spring Boot)** que sincroniza dados do **iEducar** (gestão escolar) com o **Moodle** (ambiente virtual de aprendizagem). Todo o ambiente sobe com **Docker Compose**.
 
